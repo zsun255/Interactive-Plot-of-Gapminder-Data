@@ -1,0 +1,58 @@
+---
+title: "Interactive Plot of Gapminder Data"
+author: "Zhiyi Sun"
+date: "8/16/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## The Gapminder Data
+
+#### Learn about the data [here](https://cran.r-project.org/web/packages/gapminder/README.html) 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5}
+library(dplyr)
+library(plotly)
+library(gapminder)
+
+data(gapminder)
+gapminder <- gapminder %>% 
+  filter(year == "2007")
+
+x <- list(title = "GDP Per Capita (USD, Inflation Adjusted)")
+y <- list(title = "Life Expectancy (Years)")
+
+plot_ly(gapminder, x = ~gdpPercap, y = ~lifeExp, 
+        type = "scatter", mode = "markers", 
+        color = ~continent, text = ~country) %>% 
+    layout(xaxis = x, 
+           yaxis = y, 
+           title = "GDP Per Capita and Life Expectancy Across the World in 2007")
+```
+
+## Here's the code 
+
+```{r, echo = TRUE, eval = FALSE}
+library(dplyr)
+library(plotly)
+library(gapminder)
+
+data(gapminder)
+gapminder <- gapminder %>% 
+  filter(year == "2007")
+
+x <- list(title = "GDP Per Capita (USD, Inflation Adjusted)")
+y <- list(title = "Life Expectancy (Years)")
+
+plot_ly(gapminder, x = ~gdpPercap, y = ~lifeExp, 
+        type = "scatter", mode = "markers", 
+        color = ~continent, text = ~country) %>% 
+    layout(xaxis = x, 
+           yaxis = y, 
+           title = "GDP Per Capita and Life Expectancy Across the World")
+```
+
+## Thank you!
